@@ -10,21 +10,29 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfPicoErp.Context;
-using WpfPicoErp.Models;
 
-namespace WpfPicoErp.Pages
+namespace WpfPicoErp.Windows
 {
     /// <summary>
-    /// Interaktionslogik für ProductManager.xaml
+    /// Interaktionslogik für AddCustomerWindow.xaml
     /// </summary>
-    public partial class ProductManager : ListManageBase<Product>
+    public partial class AddCustomerWindow : Window
     {
-        public ProductManager(PicoDbContext context) : base(context,context.Products)
+        public AddCustomerWindow()
         {
             InitializeComponent();
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
+            this.Close();
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
