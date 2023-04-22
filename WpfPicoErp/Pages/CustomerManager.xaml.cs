@@ -26,7 +26,7 @@ namespace WpfPicoErp.Pages
     {
         public CustomerManager()
         {
-           // InitializeComponent();
+           InitializeComponent();
         }
 
         private void OpenAddCustomer_Click(object sender, RoutedEventArgs e)

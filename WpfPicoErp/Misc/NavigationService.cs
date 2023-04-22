@@ -4,41 +4,43 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using WpfPicoErp.Interface;
+using System.Windows.Controls;
+using WpfPicoErp.Interfaces;
 using WpfPicoErp.ViewModels;
 
 namespace WpfPicoErp.Misc
 {
     public class NavigationService : INavigationService
     {
-        private readonly Dictionary<Type, Type> _viewModelViewMap = new Dictionary<Type, Type>();
-        private readonly Window _mainWindow;
+        private readonly Frame _navigationFrame;
+        private readonly Dictionary<Type, Type> _mappings;
 
-        public NavigationService(Window mainWindow)
+
+        public NavigationService(Frame navigationFrame)
         {
-            _mainWindow = mainWindow;
+            _navigationFrame = navigationFrame;
+            _mappings = new Dictionary<Type, Type>();
         }
 
-        public void Register<TViewModel, TView>()
-            where TViewModel : ViewModelBase
-            where TView : FrameworkElement
+        public void Register<TViewModel, TView>() where TViewModel : ViewModelBase where TView : FrameworkElement
         {
-            _viewModelViewMap[typeof(TViewModel)] = typeof(TView);
+            _mappings[typeof(TViewModel)] = typeof(TView);
         }
 
-        public void NavigateTo<TViewModel>()
-            where TViewModel : ViewModelBase, new()
+        public void Navigate<TViewModel>() where TViewModel : ViewModelBase, new()
         {
-            if (!_viewModelViewMap.TryGetValue(typeof(TViewModel), out var viewType))
+            var viewType = _mappings[typeof(TViewModel)];
+
+            if (viewType != null)
             {
-                throw new InvalidOperationException($"No view registered for ViewModel '{typeof(TViewModel)}'");
+                var view = Activator.CreateInstance(viewType) as FrameworkElement;
+                var vm = new TViewModel();
+                view.DataContext = vm;                                
+                _navigationFrame.Navigate(view);
+                _navigationFrame.NavigationService.RemoveBackEntry();
             }
-
-            var viewModel = new TViewModel();
-            var view = (FrameworkElement)Activator.CreateInstance(viewType);
-            view.DataContext = viewModel;
-            _mainWindow.Content = view;
         }
-
+        
     }
+
 }

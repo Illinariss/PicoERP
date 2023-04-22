@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WpfPicoErp.Context;
-using WpfPicoErp.Interface;
+using WpfPicoErp.Interfaces;
 using WpfPicoErp.Misc;
 using WpfPicoErp.Pages;
 using WpfPicoErp.ViewModels;
@@ -28,6 +28,8 @@ namespace WpfPicoErp
         {
             InitializeComponent();
         }
+
+
 
     }
 }

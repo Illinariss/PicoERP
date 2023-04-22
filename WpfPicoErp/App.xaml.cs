@@ -5,7 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using WpfPicoErp.Interface;
+using System.Windows.Controls;
+using WpfPicoErp.Interfaces;
 using WpfPicoErp.Misc;
 using WpfPicoErp.Pages;
 using WpfPicoErp.ViewModels;
@@ -17,28 +18,32 @@ namespace WpfPicoErp
     /// </summary>
     public partial class App : Application
     {
-        private  INavigationService _navigationService;
+        private INavigationService _navigationService;
 
         public App()
         {
-            Startup += OnStartup;
+
         }
 
-        private void OnStartup(object sender, StartupEventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
+            base.OnStartup(e);
+
             var mainWindow = new MainWindow();
-            _navigationService = new NavigationService(mainWindow);
+
+            // Finde den Frame, der für die Navigation verwendet werden soll
+            var navigationFrame = (Frame)mainWindow.FindName("NavigationFrame");
+            _navigationService = new NavigationService(navigationFrame);
 
             // Registriere ViewModels und zugehörige Views
             RegisterViewModels(_navigationService);
 
-            //mainWindow.Show();
-            _navigationService.NavigateTo<MainWindowViewModel>();
+            mainWindow.DataContext = new MainWindowViewModel(_navigationService);
+            mainWindow.Show();
         }
 
         public void RegisterViewModels(INavigationService navigationService)
         {
-            navigationService.Register<MainWindowViewModel,MainWindow>();
             navigationService.Register<CustomerManagerViewModel, CustomerManager>();
             navigationService.Register<InvoiceManagerViewModel, InvoiceManager>();
         }
