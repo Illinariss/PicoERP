@@ -1,13 +1,12 @@
-﻿<Window 
+﻿<Window
         x:Class="WpfPicoErp.Windows.AddCustomerWindow"
         mc:Ignorable="d"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:materialDesign="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfPicoErp.Windows"
-        Title="Add New Customer" Height="450" Width="400"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:materialDesign="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+    Title="Add New Customer" Height="450" Width="400"
         WindowStartupLocation="CenterOwner"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -16,64 +15,53 @@
     <materialDesign:DialogHost>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="Add New Customer" FontWeight="Bold" FontSize="18" Margin="10" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="0" Text="Add New Customer" FontWeight="Bold" FontSize="18" Margin="10" HorizontalAlignment="Center" />
             <ScrollViewer Grid.Row="1">
-                <StackPanel>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Grid.Column="0" Margin="10,0,0,0">
-                            <Label Content="First Name"/>
-                            <TextBox x:Name="FirstNameTextBox"  Margin="0,0,0,10" VerticalAlignment="Center"/>
+                <TabControl>
+                    <TabItem Header="Contact">
+                        <StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Label Content="First Name" Grid.Column="0" Grid.Row="0" />
+                                <TextBox x:Name="FirstNameTextBox" Grid.Column="1" Grid.Row="0"  Margin="0,0,0,10" VerticalAlignment="Center" />
+                                <Label Content="Last Name" Grid.Column="0" Grid.Row="1" />
+                                <TextBox x:Name="LastNameTextBox" Grid.Column="1" Grid.Row="1" Margin="0,0,0,10" />
+                                <Label Content="Phone" Grid.Column="0" Grid.Row="2" />
+                                <TextBox x:Name="PhoneTextBox" Margin="0,0,0,10" Grid.Row="2" Grid.Column="1" />
+                                <Label Content="Email" Grid.Column="0" Grid.Row="3" />
+                                <TextBox x:Name="EmailTextBox" Margin="0,0,0,10" Grid.Row="3" Grid.Column="1" />
+                            </Grid>
                         </StackPanel>
-                        <StackPanel Grid.Row="0" Grid.Column="1" Margin="10,0,0,0">
-                            <Label Content="Last Name"/>
-                            <TextBox x:Name="LastNameTextBox" Margin="0,0,0,10"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="1" Grid.Column="0" Margin="10,0,0,0">
-                            <Label Content="Phone"/>
-                            <TextBox x:Name="PhoneTextBox" Margin="0,0,0,10"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="1" Grid.Column="1" Margin="10,0,0,0">
-                            <Label Content="Email"/>
-                            <TextBox x:Name="EmailTextBox" Margin="0,0,0,10"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="2" Grid.Column="0" Margin="10,0,0,0">
-                            <Label Content="Address"/>
-                            <TextBox x:Name="AddressTextBox" Margin="0,0,0,10"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="2" Grid.Column="1" Margin="10,0,0,0">
-                            <Label Content="City"/>
-                            <TextBox x:Name="CityTextBox" Margin="0,0,0,10"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="3" Grid.Column="0" Margin="10,0,0,0">
-                            <Label Content="Postal Code"/>
-                            <TextBox x:Name="PostalCodeTextBox" Margin="0,0,0,10"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="3" Grid.Column="1" Margin="10,0,0,0">
-                            <Label Content="Country"/>
-                            <TextBox x:Name="CountryTextBox" Margin="0,0,0,10"/>
-                        </StackPanel>
-                    </Grid>
-                </StackPanel>
+                    </TabItem>
+                    <TabItem Header="Bank">
+                        <Grid>
+                            <TextBlock Text="Inhalt von Tab 2" />
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Documents">
+                        <Grid>
+                            <TextBlock Text="Inhalt von Tab 3" />
+                        </Grid>
+                    </TabItem>
+                </TabControl>
             </ScrollViewer>
             <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10" HorizontalAlignment="Right">
-                <Button x:Name="CancelButton" Content="Cancel" Margin="0,0,10,0" Click="CancelButton_Click" Style="{StaticResource MaterialDesignFlatButton}"/>
-                <Button x:Name="SaveButton" Content="Save" Click="SaveButton_Click" Style="{StaticResource MaterialDesignRaisedButton}"/>
+                <Button x:Name="CancelButton" Content="Cancel" Margin="0,0,10,0" Click="CancelButton_Click" Style="{StaticResource MaterialDesignFlatButton}" />
+                <Button x:Name="SaveButton" Content="Save" Click="SaveButton_Click" Style="{StaticResource MaterialDesignRaisedButton}" />
             </StackPanel>
         </Grid>
     </materialDesign:DialogHost>
-
 </Window>

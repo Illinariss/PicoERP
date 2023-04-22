@@ -15,65 +15,48 @@ using System.Windows.Shapes;
 using WpfPicoErp.Context;
 using WpfPicoErp.Models;
 using WpfPicoErp.Windows;
+using WpfPicoErp.Extension;
 
 namespace WpfPicoErp.Pages
 {
     /// <summary>
     /// Interaktionslogik für CustomerManager.xaml
     /// </summary>
-    public partial class CustomerManager : ListManageBase<Customer>
+    public partial class CustomerManager : Page
     {
-        public CustomerManager(PicoDbContext context) :base(context,context.Customers)
+        public CustomerManager()
         {
-            InitializeComponent();
-            CustomerList.ItemsSource = Items;
+           // InitializeComponent();
         }
 
         private void OpenAddCustomer_Click(object sender, RoutedEventArgs e)
         {
-            ShowAddCustomerDialog();
+            // ShowAddCustomerDialog();
         }
-        private Window GetParentWindow(DependencyObject child)
-        {
-            DependencyObject parentObject = VisualTreeHelper.GetParent(child);
-            if (parentObject == null)
-            {
-                return null;
-            }
-            else if (parentObject is Window parentWindow)
-            {
-                return parentWindow;
-            }
-            else
-            {
-                return GetParentWindow(parentObject);
-            }
-        }
+       
 
-        private void ShowAddCustomerDialog()
-        {
-            AddCustomerWindow addCustomerDialog = new AddCustomerWindow();
-            Window parentWindow = GetParentWindow(this); // Get the parent window of the current page
-            if (parentWindow != null)
-            {
-                addCustomerDialog.Owner = parentWindow;
-            }
-            bool? result = addCustomerDialog.ShowDialog();
+        //private void ShowAddCustomerDialog()
+        //{
+        //    AddCustomerWindow addCustomerDialog = new AddCustomerWindow();
+        //    Window parentWindow = WindowExtension.GetParentWindow(this); // Get the parent window of the current page
+        //    if (parentWindow != null)
+        //    {
+        //        addCustomerDialog.Owner = parentWindow;
+        //    }
+        //    bool? result = addCustomerDialog.ShowDialog();
 
-            if (result.HasValue && result.Value)
-            {
-                // Handle the new customer information here
-                var newCustomer = new Customer();
-                newCustomer.FirstName = addCustomerDialog.FirstNameTextBox.Text;
-                newCustomer.LastName = addCustomerDialog.LastNameTextBox.Text;
-                newCustomer.Email = addCustomerDialog.EmailTextBox.Text;
-                newCustomer.City = addCustomerDialog.CityTextBox.Text;
-                newCustomer.Address = addCustomerDialog.AddressTextBox.Text;
+        //    if (result.HasValue && result.Value)
+        //    {
+        //        // Handle the new customer information here
+        //        var newCustomer = new Customer();
+        //        newCustomer.FirstName = addCustomerDialog.FirstNameTextBox.Text;
+        //        newCustomer.LastName = addCustomerDialog.LastNameTextBox.Text;
+        //        newCustomer.Email = addCustomerDialog.EmailTextBox.Text;
 
-                this.AddItem(newCustomer);
-            }
-            addCustomerDialog.Close();
-        }
+        //        this.AddItem(newCustomer);
+        //    }
+        //    addCustomerDialog.Close();
+        //}
 
         private void OpenRemove_Click(object sender, RoutedEventArgs e)
         {

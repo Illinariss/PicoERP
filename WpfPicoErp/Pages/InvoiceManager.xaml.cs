@@ -10,24 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfPicoErp.Context;
-using WpfPicoErp.Interface;
-using WpfPicoErp.Misc;
-using WpfPicoErp.Pages;
-using WpfPicoErp.ViewModels;
 
-namespace WpfPicoErp
+namespace WpfPicoErp.Pages
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaktionslogik für InvoiceManager.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class InvoiceManager : Page
     {
-        public MainWindow()
+        public InvoiceManager()
         {
             InitializeComponent();
         }
-
     }
 }

@@ -10,22 +10,28 @@ using WpfPicoErp.Models;
 
 namespace WpfPicoErp.ViewModels
 {
-    public class CustomerViewModel : ViewModelBase
+    public partial class AddCustomerViewModel : ViewModelBase
     {
         #region Properties
         public int Id;
         public string FirstName;
         public string LastName;
         public string Email;
-        public string Address;
-        public string City;
-        public string PostalCode;
-        public string Country;
         public string Phone;
-        public ObservableCollection<Customer> Customers;
+        public string CompanyName;
+        public string ContactPerson;
+        public Address BillingAddress;
+        public Address ShippingAddress;
+        public BankAccount BankAccount;
+        public bool SepaDirectDebit;
+        public string PreferredContactMethod;
+        public List<Document> Documents;
+        public List<Invoice> Invoices;
         #endregion Properties
 
+        #region Methods
 
+        #endregion Methods
     }
 
 }

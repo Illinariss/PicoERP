@@ -9,6 +9,9 @@ namespace WpfPicoErp.Context
         public DbSet<Product> Products { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<InvoiceItem> InvoiceItems { get; set; }
+        public DbSet<Address> Adresses { get; set; }
+        public DbSet<BankAccount> BankAccounts { get; set; }
+        public DbSet<Document> Documents { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -21,6 +24,9 @@ namespace WpfPicoErp.Context
             modelBuilder.Entity<Product>().ToTable("Product");
             modelBuilder.Entity<Invoice>().ToTable("Invoice");
             modelBuilder.Entity<InvoiceItem>().ToTable("InvoiceItem");
+            modelBuilder.Entity<Address>().ToTable("Adress");
+            modelBuilder.Entity<BankAccount>().ToTable("BankAccounts");
+            modelBuilder.Entity<Document>().ToTable("Document");
         }
     }
 }
