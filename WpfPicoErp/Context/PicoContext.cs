@@ -12,6 +12,7 @@ namespace WpfPicoErp.Context
         public DbSet<Address> Adresses { get; set; }
         public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<Document> Documents { get; set; }
+        public DbSet<Tenant> Tenants { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -27,6 +28,7 @@ namespace WpfPicoErp.Context
             modelBuilder.Entity<Address>().ToTable("Adress");
             modelBuilder.Entity<BankAccount>().ToTable("BankAccounts");
             modelBuilder.Entity<Document>().ToTable("Document");
+            modelBuilder.Entity<Tenant>().ToTable("Tenant");
         }
     }
 }

@@ -8,6 +8,6 @@ namespace WpfPicoErp.ViewModels
 {
     public partial class CustomerManagerViewModel : ViewModelBase
     {
-
+        
     }
 }

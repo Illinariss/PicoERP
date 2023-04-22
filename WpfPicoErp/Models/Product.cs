@@ -13,7 +13,8 @@ namespace WpfPicoErp.Models
         public decimal Price { get; set; }
         public int QuantityInStock { get; set; }
 
-        // Navigation properties
-        public List<InvoiceItem> InvoiceItems { get; set; }
+        
+        public List<InvoiceItem> InvoiceItems { get; set; } = new List<InvoiceItem>();
+        public ICollection<ProductFile> Files { get; set; } = new List<ProductFile>();
     }
 }
