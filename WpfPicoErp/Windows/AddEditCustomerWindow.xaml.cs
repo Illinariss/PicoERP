@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfPicoErp.Interfaces;
+using WpfPicoErp.Misc;
+using WpfPicoErp.ViewModels;
 
 namespace WpfPicoErp.Windows
 {
@@ -21,18 +24,7 @@ namespace WpfPicoErp.Windows
     {
         public AddEditCustomerWindow()
         {
-            InitializeComponent();
-        }
-
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.DialogResult = false;
-            this.Close();
-        }
-
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+            InitializeComponent();          
+        }       
     }
 }

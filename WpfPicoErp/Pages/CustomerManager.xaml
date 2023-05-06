@@ -4,13 +4,28 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:WpfPicoErp.Pages"
+    xmlns:materialDesign="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="clr-namespace:WpfPicoErp.Models"
     Title="Customer"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-
+    <Page.Resources>
+        <Style x:Key="CustomerListBoxItemStyle" TargetType="ListBoxItem">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Padding" Value="4" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#EEE" />
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#CCC" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -31,22 +46,67 @@
             Grid.Column="0"
             Orientation="Vertical">
             <Button
-                x:Name="OpenAddCustomer"
+                x:Name="AddCustomer"
                 Margin="10"
                 Command="{Binding OpenAddCustomerWindowCommand}"
                 Content="Kunde hinzufügen" />
             <Button
+                x:Name="EditCustomer"
+                Margin="10"
+                Command="{Binding OpenEditCustomerWindowCommand}"
+                Content="Bearbeiten" />
+            <Button
                 x:Name="OpenRemove"
                 Margin="10"
-                Command="{Binding DeleteCustomerCommand}"
                 Click="OpenRemove_Click"
-                Content="Kunde entfernen" />
+                Command="{Binding DeleteCustomerCommand}"
+                Content="Löschen" />
         </StackPanel>
         <ScrollViewer
             Grid.Row="1"
             Grid.Column="1"
             HorizontalScrollBarVisibility="Disabled"
-            VerticalScrollBarVisibility="Auto" />
+            VerticalScrollBarVisibility="Auto">
 
+            <ListBox ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}">
+                <ListBox.Resources>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Padding" Value="4" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Border
+                                        x:Name="border"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}">
+                                        <ContentPresenter />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="LightGray" />
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="{DynamicResource PrimaryHueMidBrush}" />
+                                            <Setter TargetName="border" Property="TextElement.Foreground" Value="White" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.Resources>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="4" Text="{Binding FirstName}" />
+                            <TextBlock Margin="4" Text="{Binding LastName}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+        </ScrollViewer>
+        <materialDesign:Snackbar x:Name="MySnackbar" />
     </Grid>
 </Page>

@@ -1,27 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using WpfPicoErp.Context;
 using WpfPicoErp.Misc;
 using WpfPicoErp.Models;
 using WpfPicoErp.Windows;
 
 namespace WpfPicoErp.ViewModels
 {
+
     public partial class CustomerManagerViewModel : ViewModelBase
     {
-        private ObservableCollection<Customer> _customers;
 
         public CustomerManagerViewModel()
         {
+            this.PicoContext = new PicoDbContext();
             DeleteCustomerCommand = new ParameteredRelayCommand(DeleteCustomer, CanDeleteCustomer);
-            OpenAddCustomerWindowCommand = new ParameteredRelayCommand(OpenAddCustomerWindow);
-            // ...
+            OpenEditCustomerWindowCommand = new ParameteredRelayCommand(EditCustomer);
+            OpenAddCustomerWindowCommand = new ParameteredRelayCommand(AddCustomer);
+
+            LoadData();
         }
 
+        private void LoadData()
+        {
+            this.Customers = new ObservableCollection<Customer>(PicoContext.Customers.ToList());
+            var foo = "bar";
+        }
+
+        public PicoDbContext PicoContext { get; }
+
+        private ObservableCollection<Customer> _customers;
         public ObservableCollection<Customer> Customers
         {
             get => _customers;
@@ -32,9 +46,21 @@ namespace WpfPicoErp.ViewModels
             }
         }
 
-        public Customer SelectedCustomer { get; set; }
+
+        private Customer _selectedCustomer;
+        public Customer SelectedCustomer
+        {
+            get { return _selectedCustomer; }
+            set
+            {
+                _selectedCustomer = value;
+                Debug.WriteLine("SelectedCustomer changed");
+                OnPropertyChanged(nameof(SelectedCustomer));
+            }
+        }
 
         public ICommand DeleteCustomerCommand { get; }
+        public ICommand OpenEditCustomerWindowCommand { get; }
         public ICommand OpenAddCustomerWindowCommand { get; }
 
         private void DeleteCustomer(object SelectedCustomer)
@@ -54,19 +80,43 @@ namespace WpfPicoErp.ViewModels
             {
                 var addCustomerViewModel = new AddEditCustomerViewModel(SelectedCustomer);
                 var addCustomerWindow = new AddEditCustomerWindow { DataContext = addCustomerViewModel };
-                addCustomerWindow.ShowDialog();
+                addCustomerViewModel.CancelCommand = new RelayCommand(() => { addCustomerViewModel.DialogResult = false; addCustomerWindow.Close(); });
+                addCustomerViewModel.SaveCommand = new RelayCommand(() => { addCustomerViewModel.DialogResult = true; addCustomerWindow.Close(); });
+                var dialogresult = addCustomerWindow.ShowDialog();
+                if (dialogresult ?? false)
+                {
+                    PicoContext.SaveChanges();
+                }
             }
         }
 
         private bool CanDeleteCustomer(object parameter) => SelectedCustomer != null;
 
-        private void OpenAddCustomerWindow(object parameter)
+        private void AddCustomer(object parameter)
         {
-            // Implementieren Sie die Logik zum Öffnen des AddCustomerWindow
-            // z.B. indem Sie eine neue Instanz des Fensters erstellen und anzeigen
-            var addCustomerWindow = new AddEditCustomerWindow();
-           
-            addCustomerWindow.ShowDialog();
+            SelectedCustomer = new Customer();
+            var addCustomerViewModel = new AddEditCustomerViewModel(SelectedCustomer);
+            var addCustomerWindow = new AddEditCustomerWindow { DataContext = addCustomerViewModel };
+            addCustomerViewModel.CancelCommand = new RelayCommand(() =>
+            {
+                SelectedCustomer = null;
+                addCustomerWindow.Close();
+            });
+            addCustomerViewModel.SaveCommand = new RelayCommand(() =>
+            {
+                PicoContext.Add(SelectedCustomer);
+                if(PicoContext.SaveChanges() > 0)
+                {
+                    Customers.Add(SelectedCustomer);
+                }
+                else
+                {
+                    //TODO speichern fehlgeschlagen
+                }
+                addCustomerWindow.Close(); 
+            });
+            var dialogresult = addCustomerWindow.ShowDialog();
+
         }
     }
 
