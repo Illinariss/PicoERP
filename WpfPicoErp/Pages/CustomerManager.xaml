@@ -33,11 +33,12 @@
             <Button
                 x:Name="OpenAddCustomer"
                 Margin="10"
-                Click="OpenAddCustomer_Click"
+                Command="{Binding OpenAddCustomerWindowCommand}"
                 Content="Kunde hinzufügen" />
             <Button
                 x:Name="OpenRemove"
                 Margin="10"
+                Command="{Binding DeleteCustomerCommand}"
                 Click="OpenRemove_Click"
                 Content="Kunde entfernen" />
         </StackPanel>

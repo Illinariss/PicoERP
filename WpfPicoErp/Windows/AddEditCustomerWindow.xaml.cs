@@ -17,9 +17,9 @@ namespace WpfPicoErp.Windows
     /// <summary>
     /// Interaktionslogik für AddCustomerWindow.xaml
     /// </summary>
-    public partial class AddCustomerWindow : Window
+    public partial class AddEditCustomerWindow : Window
     {
-        public AddCustomerWindow()
+        public AddEditCustomerWindow()
         {
             InitializeComponent();
         }
