@@ -10,6 +10,7 @@ using WpfPicoErp.Interfaces;
 using WpfPicoErp.Misc;
 using WpfPicoErp.Pages;
 using WpfPicoErp.ViewModels;
+using WpfPicoErp.ViewModels.Pages;
 
 namespace WpfPicoErp
 {
@@ -46,6 +47,7 @@ namespace WpfPicoErp
         {
             navigationService.Register<CustomerManagerViewModel, CustomerManager>();
             navigationService.Register<InvoiceManagerViewModel, InvoiceManager>();
+            navigationService.Register<ProductManagerViewModel, ProductManager>();
         }
 
     }

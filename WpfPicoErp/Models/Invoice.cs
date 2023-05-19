@@ -32,12 +32,12 @@ namespace WpfPicoErp.Models
         public string ShippingCity { get; set; }
         public string ShippingPostalCode { get; set; }
 
-        public List<InvoiceItem> InvoiceItems { get; set; } // Navigation property
+        public virtual ICollection<InvoiceItem> InvoiceItems { get; set; } // Navigation property
         public decimal NetTotal { get; set; }
         public decimal TaxTotal { get; set; }
         public decimal GrossTotal { get; set; }
 
-        public PaymentTerm PaymentTerms { get; set; }
+        public virtual PaymentTerm PaymentTerms { get; set; }
     }
 
 

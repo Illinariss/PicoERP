@@ -15,13 +15,13 @@ namespace WpfPicoErp.Models
         public string Phone { get; set; }
         public string CompanyName { get; set; }
         public string ContactPerson { get; set; }
-        public Address BillingAddress { get; set; }
-        public Address ShippingAddress { get; set; }
-        public BankAccount BankAccount { get; set; }
+        public virtual Address BillingAddress { get; set; }
+        public virtual Address ShippingAddress { get; set; }
+        public virtual BankAccount BankAccount { get; set; }
         public bool SepaDirectDebit { get; set; }
         public string PreferredContactMethod { get; set; }
-        public List<Document> Documents { get; set; }
-        public List<Invoice> Invoices { get; set; }
+        public virtual ICollection<Document> Documents { get; set; }
+        public virtual ICollection<Invoice> Invoices { get; set; }
     }
 
 

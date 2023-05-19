@@ -10,8 +10,9 @@ using WpfPicoErp.Context;
 using WpfPicoErp.Misc;
 using WpfPicoErp.Models;
 using WpfPicoErp.Windows;
+using WpfPicoErp.ViewModels.Windows;
 
-namespace WpfPicoErp.ViewModels
+namespace WpfPicoErp.ViewModels.Pages
 {
 
     public partial class CustomerManagerViewModel : ViewModelBase
@@ -19,7 +20,7 @@ namespace WpfPicoErp.ViewModels
 
         public CustomerManagerViewModel()
         {
-            this.PicoContext = new PicoDbContext();
+            PicoContext = new PicoDbContext();
             DeleteCustomerCommand = new ParameteredRelayCommand(DeleteCustomer, CanDeleteCustomer);
             OpenEditCustomerWindowCommand = new ParameteredRelayCommand(EditCustomer);
             OpenAddCustomerWindowCommand = new ParameteredRelayCommand(AddCustomer);
@@ -29,7 +30,7 @@ namespace WpfPicoErp.ViewModels
 
         private void LoadData()
         {
-            this.Customers = new ObservableCollection<Customer>(PicoContext.Customers.ToList());
+            Customers = new ObservableCollection<Customer>(PicoContext.Customers.ToList());
             var foo = "bar";
         }
 
@@ -105,7 +106,7 @@ namespace WpfPicoErp.ViewModels
             addCustomerViewModel.SaveCommand = new RelayCommand(() =>
             {
                 PicoContext.Add(SelectedCustomer);
-                if(PicoContext.SaveChanges() > 0)
+                if (PicoContext.SaveChanges() > 0)
                 {
                     Customers.Add(SelectedCustomer);
                 }
@@ -113,7 +114,7 @@ namespace WpfPicoErp.ViewModels
                 {
                     //TODO speichern fehlgeschlagen
                 }
-                addCustomerWindow.Close(); 
+                addCustomerWindow.Close();
             });
             var dialogresult = addCustomerWindow.ShowDialog();
 

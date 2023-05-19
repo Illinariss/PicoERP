@@ -20,9 +20,9 @@ namespace WpfPicoErp.Pages
     /// <summary>
     /// Interaktionslogik für ProductManager.xaml
     /// </summary>
-    public partial class ProductManager : ListManageBase<Product>
+    public partial class ProductManager 
     {
-        public ProductManager(PicoDbContext context) : base(context,context.Products)
+        public ProductManager()
         {
             InitializeComponent();
         }

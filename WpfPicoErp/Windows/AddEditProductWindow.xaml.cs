@@ -10,24 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfPicoErp.Context;
-using WpfPicoErp.Models;
-using WpfPicoErp.Windows;
-using WpfPicoErp.Extension;
 
-namespace WpfPicoErp.Pages
+namespace WpfPicoErp.Windows
 {
     /// <summary>
-    /// Interaktionslogik für CustomerManager.xaml
+    /// Interaktionslogik für AddEditArticleWindow.xaml
     /// </summary>
-    public partial class CustomerManager : Page
+    public partial class AddEditProductWindow : Window
     {
-        public CustomerManager()
+        public AddEditProductWindow()
         {
-           InitializeComponent();
+            InitializeComponent();
         }
-
     }
 }

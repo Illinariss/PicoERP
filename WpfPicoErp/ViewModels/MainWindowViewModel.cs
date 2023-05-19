@@ -8,6 +8,7 @@ using System.Windows.Input;
 using WpfPicoErp.Interfaces;
 using WpfPicoErp.Misc;
 using WpfPicoErp.Pages;
+using WpfPicoErp.ViewModels.Pages;
 
 namespace WpfPicoErp.ViewModels
 {
@@ -49,8 +50,9 @@ namespace WpfPicoErp.ViewModels
         {
             NavigationItems = new ObservableCollection<INavigationItem>
             {
-                new NavigationItem("Kundenverwaltung", () => navigationService.Navigate<CustomerManagerViewModel>(), navigationService,typeof(CustomerManagerViewModel), "Images/customer.png"),
-                new NavigationItem("Rechnungsverwaltung", () => navigationService.Navigate<InvoiceManagerViewModel>(), navigationService,typeof(InvoiceManagerViewModel), "Images/invoice.png")
+                new NavigationItem("Kunden", () => navigationService.Navigate<CustomerManagerViewModel>(), navigationService,typeof(CustomerManagerViewModel), "Images/customer.png"),
+                new NavigationItem("Artikel", () => navigationService.Navigate<ProductManagerViewModel>(), navigationService,typeof(ProductManagerViewModel), "Images/article.png"),
+                new NavigationItem("Rechnungsverwaltung", () => navigationService.Navigate<InvoiceManagerViewModel>(), navigationService,typeof(InvoiceManagerViewModel), "Images/invoice.png"),
             };
         }
 

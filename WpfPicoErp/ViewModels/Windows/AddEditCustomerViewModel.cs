@@ -11,7 +11,7 @@ using WpfPicoErp.Interfaces;
 using WpfPicoErp.Misc;
 using WpfPicoErp.Models;
 
-namespace WpfPicoErp.ViewModels
+namespace WpfPicoErp.ViewModels.Windows
 {
     public partial class AddEditCustomerViewModel : ViewModelBase, ISaveCancelViewModel
     {
@@ -52,9 +52,9 @@ namespace WpfPicoErp.ViewModels
 
         public AddEditCustomerViewModel(Customer customer)
         {
-            this.Customer = customer;            
+            Customer = customer;
         }
-        
+
         private bool CustomerValid()
         {
             //TODO Sinnvolle Prüfung hinzufügen.

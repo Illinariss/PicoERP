@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfPicoErp.ViewModels
+namespace WpfPicoErp.ViewModels.Windows
 {
-    public partial class AddProductViewModel
+    public partial class AddEditProductViewModel
     {
     }
 }

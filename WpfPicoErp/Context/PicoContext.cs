@@ -7,6 +7,7 @@ namespace WpfPicoErp.Context
     {
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<InvoiceItem> InvoiceItems { get; set; }
         public DbSet<Address> Adresses { get; set; }
@@ -29,6 +30,7 @@ namespace WpfPicoErp.Context
             modelBuilder.Entity<BankAccount>().ToTable("BankAccounts");
             modelBuilder.Entity<Document>().ToTable("Document");
             modelBuilder.Entity<Tenant>().ToTable("Tenant");
+            modelBuilder.Entity<ProductImage>().ToTable("ProductImage");
         }
     }
 }
