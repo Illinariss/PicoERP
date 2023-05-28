@@ -17,37 +17,47 @@
             </Style>
             <Style x:Key="SidebarListBoxItemStyle" TargetType="ListBoxItem">
                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="FontWeight" Value="Bold"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="ListBoxItem">
                             <Border
-                                x:Name="Bd"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}">
+                    x:Name="Bd"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <Image
-                                        Grid.Column="0"
-                                        Width="16"
-                                        Height="16"
-                                        Margin="5"
-                                        Source="{Binding ImagePath}" />
+                            Grid.Column="0"
+                            Width="16"
+                            Height="16"
+                            Margin="5"
+                            Source="{Binding ImagePath}" />
                                     <TextBlock
-                                        Grid.Column="1"
-                                        Margin="5"
-                                        Text="{Binding Name}" />
+                            Grid.Column="1"
+                            Margin="5"
+                            Text="{Binding Name}"
+                            Foreground="{TemplateBinding Foreground}"
+                            FontWeight="{TemplateBinding FontWeight}"
+                            FontStyle="{TemplateBinding FontStyle}"
+                            FontSize="{TemplateBinding FontSize}"/>
                                 </Grid>
                             </Border>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsSelected" Value="true">
                                     <Setter TargetName="Bd" Property="Background" Value="LightGray" />
+                                    <Setter Property="Foreground" Value="Black"/>
+                                    <Setter Property="FontStyle" Value="Italic"/>
                                 </Trigger>
                                 <Trigger Property="IsMouseOver" Value="true">
                                     <Setter TargetName="Bd" Property="Background" Value="LightGray" />
+                                    <Setter Property="Foreground" Value="Black"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>

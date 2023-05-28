@@ -21,8 +21,8 @@ namespace WpfPicoErp.ViewModels.Pages
         public CustomerManagerViewModel()
         {
             PicoContext = new PicoDbContext();
-            DeleteCustomerCommand = new ParameteredRelayCommand(DeleteCustomer, CanDeleteCustomer);
-            OpenEditCustomerWindowCommand = new ParameteredRelayCommand(EditCustomer);
+            DeleteCustomerCommand = new ParameteredRelayCommand(DeleteCustomer, CustomerExists);
+            OpenEditCustomerWindowCommand = new ParameteredRelayCommand(EditCustomer, CustomerExists);
             OpenAddCustomerWindowCommand = new ParameteredRelayCommand(AddCustomer);
 
             LoadData();
@@ -64,15 +64,13 @@ namespace WpfPicoErp.ViewModels.Pages
         public ICommand OpenEditCustomerWindowCommand { get; }
         public ICommand OpenAddCustomerWindowCommand { get; }
 
-        private void DeleteCustomer(object SelectedCustomer)
+        private void DeleteCustomer(object parameter)
         {
             if (SelectedCustomer != null)
             {
-                // Implementieren Sie die Logik zum Löschen des ausgewählten Kunden
-                // z.B. Customers.Remove(SelectedCustomer) oder Kunden aus der Datenbank löschen
-
-                // Aktualisieren Sie die Kundenliste nach dem Löschen
-                // z.B. durch erneutes Laden der Kunden aus der Datenbank
+                //TODO: Sicherheitsabfrage
+                PicoContext.Remove(SelectedCustomer);
+                Customers.Remove(SelectedCustomer);
             }
         }
         private void EditCustomer(object parameter)
@@ -81,17 +79,26 @@ namespace WpfPicoErp.ViewModels.Pages
             {
                 var addCustomerViewModel = new AddEditCustomerViewModel(SelectedCustomer);
                 var addCustomerWindow = new AddEditCustomerWindow { DataContext = addCustomerViewModel };
-                addCustomerViewModel.CancelCommand = new RelayCommand(() => { addCustomerViewModel.DialogResult = false; addCustomerWindow.Close(); });
-                addCustomerViewModel.SaveCommand = new RelayCommand(() => { addCustomerViewModel.DialogResult = true; addCustomerWindow.Close(); });
-                var dialogresult = addCustomerWindow.ShowDialog();
-                if (dialogresult ?? false)
+                addCustomerViewModel.CancelCommand = new RelayCommand(() => {
+                    PicoContext.Entry(SelectedCustomer).Reload();
+                    addCustomerWindow.Close(); 
+                });
+                addCustomerViewModel.SaveCommand = new RelayCommand(() => 
                 {
-                    PicoContext.SaveChanges();
-                }
+                    if (PicoContext.SaveChanges() > 0)
+                    {
+                        addCustomerWindow.Close();
+                    }
+                    else
+                    {
+                        //todo: fehlermeldung speichern fehlgeschlagen.
+                    }
+                });
+                addCustomerWindow.ShowDialog();
             }
         }
 
-        private bool CanDeleteCustomer(object parameter) => SelectedCustomer != null;
+        private bool CustomerExists(object parameter) => SelectedCustomer != null;
 
         private void AddCustomer(object parameter)
         {
@@ -112,12 +119,11 @@ namespace WpfPicoErp.ViewModels.Pages
                 }
                 else
                 {
-                    //TODO speichern fehlgeschlagen
+                    //todo: fehlermeldung speichern fehlgeschlagen.
                 }
                 addCustomerWindow.Close();
             });
-            var dialogresult = addCustomerWindow.ShowDialog();
-
+            addCustomerWindow.ShowDialog();
         }
     }
 

@@ -28,7 +28,7 @@
                 HorizontalAlignment="Center"
                 FontSize="18"
                 FontWeight="Bold"
-                Text="Add New Customer" />
+                Text="Add New Product" />
             <ScrollViewer Grid.Row="1">
                 <TabControl>
                     <TabItem Header="Allgemein">
@@ -39,6 +39,8 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
@@ -54,37 +56,60 @@
                                     Grid.Column="1"
                                     Margin="0,0,0,10"
                                     VerticalAlignment="Center"
-                                    Text="{Binding Customer.FirstName}" />
+                                    Text="{Binding Product.FirstName}" />
                                 <Label
                                     Grid.Row="1"
                                     Grid.Column="0"
-                                    Content="Last Name" />
+                                    Content="Name" />
                                 <TextBox
-                                    x:Name="LastNameTextBox"
+                                    x:Name="NameTextBox"
                                     Grid.Row="1"
                                     Grid.Column="1"
                                     Margin="0,0,0,10"
-                                    Text="{Binding Customer.LastName}" />
+                                    Text="{Binding Product.Name}" />
                                 <Label
                                     Grid.Row="2"
                                     Grid.Column="0"
-                                    Content="Phone" />
+                                    Content="Description" />
                                 <TextBox
-                                    x:Name="PhoneTextBox"
+                                    x:Name="DescriptionTextBox"
+                                    AcceptsReturn="True"
+                                    VerticalScrollBarVisibility="Auto"
+                                    HorizontalScrollBarVisibility="Auto" 
                                     Grid.Row="2"
                                     Grid.Column="1"
                                     Margin="0,0,0,10"
-                                    Text="{Binding Customer.Phone}" />
+                                    Text="{Binding Product.Description}" />                               
                                 <Label
                                     Grid.Row="3"
                                     Grid.Column="0"
-                                    Content="Email" />
+                                    Content="Category" />
                                 <TextBox
-                                    x:Name="EmailTextBox"
+                                    x:Name="CategoryTextBox"
                                     Grid.Row="3"
                                     Grid.Column="1"
                                     Margin="0,0,0,10"
-                                    Text="{Binding Customer.Email}" />
+                                    Text="{Binding Product.Category}" />
+                                <Label
+                                    Grid.Row="4"
+                                    Grid.Column="0"
+                                    Content="Weight" />
+                                <TextBox
+                                    x:Name="WeightTextBox"
+                                    Grid.Row="4"
+                                    Grid.Column="1"
+                                    Margin="0,0,0,10"
+                                    Text="{Binding Product.Weight}" />
+                                <Label
+                                    Grid.Row="5"
+                                    Grid.Column="0"
+                                    Content="Price" />
+                                <TextBox
+                                    x:Name="PriceTextBox"
+                                    Grid.Row="5"
+                                    Grid.Column="1"
+                                    Margin="0,0,0,10"
+                                    Text="{Binding Product.Price}" />
                             </Grid>
                         </StackPanel>
                     </TabItem>

@@ -12,6 +12,7 @@
     Title="PicoERP"
     Width="1600"
     Height="800"
+    WindowStartupLocation="CenterScreen"
     Background="{DynamicResource MaterialDesignPaper}"
     FontFamily="{DynamicResource MaterialDesignFont}"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"

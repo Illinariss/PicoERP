@@ -16,21 +16,6 @@ namespace WpfPicoErp.ViewModels.Windows
     public partial class AddEditCustomerViewModel : ViewModelBase, ISaveCancelViewModel
     {
         #region Properties
-
-        private bool? _dialogResult;
-        public bool? DialogResult
-        {
-            get => _dialogResult;
-            set
-            {
-                if (_dialogResult != value)
-                {
-                    _dialogResult = value;
-                    OnPropertyChanged(nameof(DialogResult));
-                }
-            }
-        }
-
         private Customer _customer;
 
         public Customer Customer
@@ -55,24 +40,8 @@ namespace WpfPicoErp.ViewModels.Windows
             Customer = customer;
         }
 
-        private bool CustomerValid()
-        {
-            //TODO Sinnvolle Prüfung hinzufügen.
-            return true;
-        }
-
-        private void Save()
-        {
-            DialogResult = true;
-        }
-
         #endregion Properties
 
-        #region Methods
-
-
-
-        #endregion Methods
     }
 
 }
