@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfPicoErp.Pages
+namespace WpfPicoErp.Windows
 {
     /// <summary>
-    /// Interaktionslogik für InvoiceDetail.xaml
+    /// Interaktionslogik für AddEditInvoiceWindow.xaml
     /// </summary>
-    public partial class InvoiceDetail : Page
+    public partial class AddEditInvoiceWindow : Window
     {
-        public InvoiceDetail()
+        public AddEditInvoiceWindow()
         {
             InitializeComponent();
         }

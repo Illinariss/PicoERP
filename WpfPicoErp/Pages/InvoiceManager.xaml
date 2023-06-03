@@ -4,15 +4,170 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:WpfPicoErp.Pages"
+    xmlns:materialDesign="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="InvoiceManager"
+    xmlns:models="clr-namespace:WpfPicoErp.Models"
+    Title="Rechnungen"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-
+    <Page.Resources>
+        <Style x:Key="InvoiceListBoxItemStyle" TargetType="ListBoxItem">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Padding" Value="4" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#EEE" />
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#CCC" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
     <Grid>
-        <Label>
-            Invoice
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="0">
+            Rechnung
         </Label>
+        <StackPanel Grid.Column="1" Orientation="Horizontal">
+            <Button Margin="10,0,0,0" Content="Zurück" />
+        </StackPanel>
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="0"
+            Orientation="Vertical">
+            <Button
+                x:Name="AddInvoice"
+                Margin="10"
+                Command="{Binding OpenAddInvoiceWindowCommand}"
+                Content="Rechnung hinzufügen" />
+            <Button
+                x:Name="EditInvoice"
+                Margin="10"
+                Command="{Binding OpenEditInvoiceWindowCommand}"
+                Content="Bearbeiten" />
+            <Button
+                x:Name="OpenRemove"
+                Margin="10"
+                Command="{Binding DeleteInvoiceCommand}"
+                Content="Löschen" />
+        </StackPanel>
+        <ScrollViewer
+            Grid.Row="1"
+            Grid.Column="1"
+            HorizontalScrollBarVisibility="Disabled"
+            VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                        Width="200"
+                        Margin="4"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Text="Rechnungsnummer" />
+                    <TextBlock
+                        Width="100"
+                        Margin="4"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Text="Datum" />
+                    <TextBlock
+                        Width="200"
+                        Margin="4"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Text="Kundenname" />
+                    <TextBlock
+                        Width="100"
+                        Margin="4"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Text="Erstellungsdatum" />
+                    <TextBlock
+                        Width="100"
+                        Margin="4"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Text="Fälligkeitsdatum" />
+                    <TextBlock
+                        Width="100"
+                        Margin="4"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Text="Bruttogesamtpreis" /> 
+                </StackPanel>
+
+                <ScrollViewer
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            HorizontalScrollBarVisibility="Auto"
+                            VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <ListBox ItemsSource="{Binding Invoices}" SelectedItem="{Binding SelectedInvoice, Mode=TwoWay}">
+                            <ListBox.Resources>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Padding" Value="4" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListBoxItem">
+                                                <Border
+                                                    x:Name="border"
+                                                    Background="{TemplateBinding Background}"
+                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                    BorderThickness="{TemplateBinding BorderThickness}">
+                                                    <ContentPresenter />
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="border" Property="Background" Value="LightGray" />
+                                                    </Trigger>
+                                                    <Trigger Property="IsSelected" Value="True">
+                                                        <Setter TargetName="border" Property="Background" Value="{DynamicResource PrimaryHueMidBrush}" />
+                                                        <Setter TargetName="border" Property="TextElement.Foreground" Value="White" />
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListBox.Resources>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock
+                                            Width="200"
+                                            Margin="4"
+                                            Text="{Binding CustomerName}" />
+                                        <TextBlock
+                                            Width="100"
+                                            Margin="4"
+                                            Text="{Binding CreationDate}" />
+                                        <TextBlock
+                                            Width="100"
+                                            Margin="4"
+                                            Text="{Binding DueDate}" />
+                                        <TextBlock
+                                            Width="100"
+                                            Margin="4"
+                                            Text="{Binding GrossTotalPrice}" /> 
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                </ScrollViewer>
+            </StackPanel>
+        </ScrollViewer>
+        <materialDesign:Snackbar x:Name="MySnackbar" />
     </Grid>
 </Page>

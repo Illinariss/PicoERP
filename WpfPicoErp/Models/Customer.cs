@@ -20,8 +20,8 @@ namespace WpfPicoErp.Models
         public virtual BankAccount BankAccount { get; set; }
         public bool SepaDirectDebit { get; set; }
         public string PreferredContactMethod { get; set; }
-        public virtual ICollection<Document> Documents { get; set; }
-        public virtual ICollection<Invoice> Invoices { get; set; }
+        public virtual ICollection<Document> Documents { get; set; } = new List<Document>();
+        public virtual ICollection<Invoice> Invoices { get; set; } = new List<Invoice>();
     }
 
 
